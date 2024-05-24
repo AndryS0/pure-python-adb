@@ -79,6 +79,14 @@ class DeviceAsync(TransportAsync):
         async with sync_conn:
             return await sync.pull(src, dest)
 
+    async def is_installed(self, package):
+        result = await self.shell('pm path {}'.format(package))
+
+        if "package:" in result:
+            return True
+        else:
+            return False
+    
     async def install(self, path,
                 forward_lock=False,  # -l
                 reinstall=False,  # -r
