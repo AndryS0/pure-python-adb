@@ -82,7 +82,7 @@ class HostAsync(CommandAsync):
                 break
             # hardcode to avoid adding offline devices
             if line.find('offline') != -1:
-                break
+                continue
 
             devices.append(DeviceAsync(self, line.split()[0]))
 
