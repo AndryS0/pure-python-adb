@@ -69,7 +69,7 @@ class HostAsync(CommandAsync):
             if port:
                 cmd = "{}:{}".format(cmd, port)
 
-        return self._execute_cmd(cmd)
+        return await self._execute_cmd(cmd)
 
     async def devices(self):
         cmd = "host:devices"
