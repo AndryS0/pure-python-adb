@@ -58,7 +58,7 @@ class HostAsync(CommandAsync):
 
     async def remote_connect(self, host, port):
         cmd = "host:connect:%s:%d" % (host, port)
-        result = self._execute_cmd(cmd)
+        result = await self._execute_cmd(cmd)
 
         return "connected" in result
 
