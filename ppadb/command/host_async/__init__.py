@@ -9,7 +9,7 @@ class HostAsync(CommandAsync):
     DEVICE = "device"
     BOOTLOADER = "bootloader"
 
-    async def _execute_cmd(self, cmd):
+    async def _execute_cmd(self, cmd) -> str:
         async with await self.create_connection() as conn:
             await conn.send(cmd)
             return await conn.receive()
@@ -79,6 +79,9 @@ class HostAsync(CommandAsync):
 
         for line in result.split('\n'):
             if not line:
+                break
+            # hardcode to avoid adding offline devices
+            if line.find('offline') != -1:
                 break
 
             devices.append(DeviceAsync(self, line.split()[0]))
